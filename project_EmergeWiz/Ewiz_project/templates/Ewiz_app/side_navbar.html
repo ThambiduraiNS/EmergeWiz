@@ -1,0 +1,57 @@
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static '/css/index.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="col-2 sidenav m-0 p-0" id="sidenav">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/">{% bs_icon 'columns-gap' %} 
+                    <span class="menus dashboard">DashBoard</span></a>
+            </li>
+
+            <!-- <li class="nav-item">
+                <div class="dropdown">
+                    <a class="btn btn-div w-100 text-start" href="#" role="button"
+                        onclick="toggleDropdown(this)">
+                        {% bs_icon 'person' %} <span class="menus">User</span> 
+                        <span class="right_arrow">{% bs_icon 'caret-right-fill' %}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-content">
+                        <li><a class="dropdown-item new" href="/user_module/"><span class="slash">|</span> New User</a></li>
+                        <li><a class="dropdown-item manage" href="/manage_user/"><span class="slash">|</span> Manage User</a></li>
+                    </ul>
+                </div>
+            </li> -->
+
+            
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="btn btn-div w-100 text-start" href="#" role="button"
+                        onclick="toggleDropdown(this)">
+                        {% bs_icon 'book' %} <span class="menus">Job Openings</span> 
+                        <span class="right_arrow">{% bs_icon 'caret-right-fill' %}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-content">
+                        <li><a class="dropdown-item new" href="/add_job_openings/"><span class="slash">|</span> Add Jobs </a></li>
+                        <li><a class="dropdown-item manage" href="/manage_job_openings/"><span class="slash">|</span> Manage Jobs</a></li>
+                    </ul>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+
+
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'Ewiz_app/base.html' %}
+
+{% load static %}
+{% load bootstrap_icons %}
+
+
+{% block title %}Course{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static '/css/new_jobs.css' %}">
+<link rel="stylesheet" href="{% static '/css/header.css' %}">
+{% endblock %}
+
+{% block header %}
+{% include 'Ewiz_app/header.html' %}
+{% endblock %}
+
+{% block content %}
+<!-- <div class="container-fluid"> -->
+<div class="row m-0 p-0">
+    {% include 'Ewiz_app/side_navbar.html' %}
+
+    <div class="col-12 col-lg-10 background-div">
+
+        <div class="row m-0 p-0">
+            <div class="col border bg-white rounded mt-4 ms-xll-4 mb-2 px-xll-4">
+                <nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
+                    <ol class="breadcrumb pt-3 mb-3 ps-lg-3">
+                        <li class="breadcrumb-item"><a class="user-a" href="#">Job Openings</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Jobs</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="row m-0 p-0">
+            <div class="col border bg-white rounded mt-2 ms-xll-4 mb-2 px-xll-4">
+
+                <div class="row m-0 p-0">
+                    <form id="login-form" class="pe-lg-4" action="" method="post">
+                        {% csrf_token %}
+                        <div class="col-12 mt-4 position-relative">
+                            <h5 class="fw-bold">Update Jobs</h5>
+                            <p class="user-para">Use the below form to update your profile</p>
+                            <span class="message" id="message">{{message}}</span>
+                        </div>
+
+                        <!-- Job Title Field -->
+                        <div class="row d-flex justify-content-between pe-0">
+                            <div class="col-12 col-md-6">
+                                <div class="user-input-wrp me-md-2">
+                                    <input type="text" name="job_title" id="job_title" value="{{data.job_title}}" class="form-control"
+                                        placeholder=" " autocomplete="off" autofocus>
+                                    <label class="floating-label">&nbsp;Job Title&nbsp;</label>
+                                    <span id="job_title_error" class="error-div">
+                                    
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Location Field -->
+                            <div class="col-12 col-md-6 pe-md-0">
+                                <div class="user-input-wrp me-md-2">
+                                    <input type="text" name="location" id="location" value="{{data.location}}" class="form-control"
+                                        placeholder=" " autocomplete="off" autofocus>
+                                    <label class="floating-label">&nbsp;Location&nbsp;</label>
+                                    <span id="location_error" class="error-div">
+                                    
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Experience Field -->
+                            <div class="col-12 col-md-6">
+                                <div class="user-input-wrp me-md-2">
+                                    <input type="text" name="experience" id="experience" value="{{data.experience}}" class="form-control"
+                                        placeholder=" " autocomplete="off" autofocus>
+                                    <label class="floating-label">&nbsp;Experience&nbsp;</label>
+                                    <span id="experience_error" class="error-div">
+                                    
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Salary Field -->
+                            <div class="col-12 col-md-6 pe-md-0">
+                                <div class="user-input-wrp me-md-2">
+                                    <input type="text" name="salary" id="salary" value="{{data.salary}}" class="form-control"
+                                        placeholder=" " autocomplete="off" autofocus>
+                                    <label class="floating-label">&nbsp;Salary&nbsp;</label>
+                                    <span id="salary_error" class="error-div">
+                                    
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Description Field -->
+                            <div class="col-12 col-md-6">
+                                <div class="user-input-wrp me-md-2">
+                                    <textarea name="description" id="description" class="form-control text-area p-0 m-0" rows="6" cols="1" placeholder="Job Description" autocomplete="off" autofocus>{{data.description}}</textarea>
+                                    <span id="description_error" class="error-div error-right">
+                                        {% if errors.description %}
+                                            {{errors.description}}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row d-flex justify-content-between my-3">
+                            <div class="col-6 d-flex justify-content-md-end p-0 pe-4 pe-lg-4">
+                                <input type="reset" value="Cancel" class="btn login-btn w-50">
+                            </div>
+                            <div class="col-6 d-flex justify-content-lg-start ps-lg-4 p-0 ps-4">
+                                <input type="submit" value="Save" class="btn login-btn w-50">
+                            </div>
+                        </div>
+                    </form>
+                    <span>
+                        {% if course %}
+                            <span class="errors-common d-flex justify-content-center mb-5">{{course}}</span>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    function toggleDropdown(element) {
+        // Close all dropdowns
+        const allDropdowns = document.querySelectorAll('.dropdown-menu');
+        allDropdowns.forEach(dropdown => {
+            if (dropdown !== element.nextElementSibling) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Close all arrows
+        const allArrows = document.querySelectorAll('.right_arrow');
+        allArrows.forEach(arrow => {
+            if (arrow !== element.querySelector('.right_arrow')) {
+                arrow.classList.remove('arrow_user');
+            }
+        });
+
+        // Toggle the clicked dropdown and arrow
+        const dropdownMenu = element.nextElementSibling;
+        dropdownMenu.classList.toggle('show');
+        const rightArrow = element.querySelector('.right_arrow');
+        rightArrow.classList.toggle('arrow_user');
+    }
+
+    document.getElementById('toggle-sidenav').addEventListener('click', function () {
+        const sidenav = document.getElementById('sidenav');
+        sidenav.classList.toggle('collapsed');
+    });
+
+    // validation
+
+    // document.getElementById("login-form").addEventListener("submit", function (event) {
+    //     event.preventDefault(); // Prevent form submission
+
+    //     var course_name = document.getElementById("course").value.trim();
+
+    //     let hasError = false;
+
+    //     // client username Field validation
+    //     if (course_name === "") {
+    //         document.getElementById("course_error").innerText = "Course Field is required";
+    //         hasError = true;
+    //     } else {
+    //         document.getElementById("course_error").innerText = "";
+    //     }
+
+    //     // Submit the form if there are no errors
+    //     if (!hasError) {
+    //         document.getElementById("login-form").submit();
+    //     }
+    // });
+
+    function permission(checkboxId) {
+        // Get the checkbox
+        console.log("permission function")
+        var checkBox = document.getElementById(checkboxId);
+        if (checkBox.checked) {
+            checkBox.value = true;
+        } else {
+            checkBox.value = false;
+        }
+    }
+
+    function showMessage() {
+        const alertBox = document.getElementById('message');
+        alertBox.style.display = 'block';
+
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 5000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => showMessage());
+</script>
+{% endblock %}

@@ -1,0 +1,456 @@
+{% extends 'Ewiz_app/base.html' %}
+
+{% load static %}
+{% load bootstrap_icons %}
+
+
+{% block title %}User Module{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static '/css/new_jobs.css' %}">
+<link rel="stylesheet" href="{% static '/css/header.css' %}">
+<link rel="stylesheet" href="{% static '/css/manage_jobs.css' %}">
+<meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+
+{% block header %}
+{% include 'Ewiz_app/header.html' %}
+{% endblock %}
+
+{% block content %}
+<!-- <div class="container-fluid"> -->
+<div class="row m-0 p-0">
+    {% include 'Ewiz_app/side_navbar.html' %}
+
+    <div class="col-10 background-div">
+
+        <div class="row m-0 p-0 position-relative">
+            <div class="col border bg-white rounded mt-4 ms-1 mb-2 ps-3">
+                <nav style="--bs-breadcrumb-divider: '|';" aria-label="breadcrumb">
+                    <ol class="breadcrumb pt-3">
+                        <li class="breadcrumb-item"><a class="user-a" href="#">Jobs Openings</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Manage Jobs</li>
+                    </ol>
+                </nav>
+                <span class="message" id="message">
+                    {% for message in messages %}
+                        <div>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </span>
+            </div>
+        </div>
+
+        <div class="row m-0 p-0">
+            <div class="col border bg-white rounded mt-2 ms-1 mb-2">
+
+                <div class="row m-0 p-0">
+
+                    <div class="col-6 mt-4 p-0">
+                        <h5 class="fw-bold">Manage Jobs</h5>
+                    </div>
+
+                    <div class="col-6 d-flex justify-content-end p-0">
+                        <form class="search-form" action="{% url 'search_job_openings' %}" method="get">
+                            <input type="text" name="q" class="search-input" placeholder="Search" autocomplete="off">
+                            <button type="submit" class="search-button">
+                                {% bs_icon 'search' %}
+                            </button>
+                        </form>
+                    </div>
+
+                    <p class="user-para p-0">Use the below tabel to update your profile</p>
+                </div>
+
+                <!-- Pagination controls -->
+                <div class="row">
+                    <div class="col d-flex justify-content-end py-3 gap-2">
+                        <form id="perPageForm" method="get" class="d-flex">
+                            <select class="select-div me-2" name="per_page" id="perPageSelect" onchange="this.form.submit();">
+                                <option class="option" value="10" {% if per_page == '10' %}selected{% endif %}>10 per page</option>
+                                <option class="option" value="15" {% if per_page == '15' %}selected{% endif %}>15 per page</option>
+                                <option class="option" value="25" {% if per_page == '25' %}selected{% endif %}>25 per page</option>
+                                <option class="option" value="50" {% if per_page == '50' %}selected{% endif %}>50 per page</option>
+                            </select>
+
+                            <span id="item-range" class="item-range align-content-center">.
+                                {{ page_obj.start_index}}-{{ page_obj.end_index }}
+                            </span>
+
+                            {% if page_obj.has_previous %}
+                            <a class="anchor align-content-center"
+                                href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}"><span
+                                    class="page-icon">{% bs_icon 'chevron-left' %}</span></a>
+                            {% endif %}
+                            {% if page_obj.has_next %}
+                            <a class="anchor align-content-center"
+                                href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}">
+                                <span class="page-icon">{% bs_icon 'chevron-right' %}</span>
+                            </a>
+                            {% endif %}
+
+                        </form>
+                        <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
+                            data-bs-title="delete">
+                            <a href="javascript:void(0);" id="deleteSelected">
+                                <span class="delete">
+                                    <?xml version="1.0" ?>
+                                    <!DOCTYPE svg
+                                        PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+                                    <svg class="delete-icon" height="512px" id="Layer_1"
+                                        style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"
+                                        width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g>
+                                            <path
+                                                d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z" />
+                                            <g>
+                                                <rect height="241" width="14" x="249" y="160" />
+                                                <polygon points="320,160 305.4,160 294.7,401 309.3,401   " />
+                                                <polygon points="206.5,160 192,160 202.7,401 217.3,401   " />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col my-2">
+                        <div class="table-container">
+                            <table class="tabel-div">
+                                <tbody class="tabel_body_div">
+                                    <tr class="trow">
+                                        <th class="check">
+                                            <input type="checkbox" class="form-check-input" name="checkbox" id="select_all">
+                                        </th>
+                                        <th class="thead">Job Title</th>
+                                        <th class="thead">Location</th>
+                                        <th class="thead">Experience</th>
+                                        <th class="thead">Salary</th>
+                                        <th class="thead">Description</th>
+                                        <th class="thead">Status</th>
+                                        <th class="action">Action</th>
+                                    </tr>
+                                    {% for user in page_obj %}
+                                    <tr class="trow">
+                                        <td class="check1">
+                                            <input type="checkbox" class="form-check-input user-checkbox checked-row" name="user_ids"
+                                                value="{{ user.id }}" id="user{{ user.id }}">
+                                        </td>
+                                        <td class="tdata">{{ user.job_title }}</td>
+                                        <td class="tdata">{{ user.location }}</td>
+                                        <td class="tdata">{{ user.experience }}</td>
+                                        <td class="tdata">{{ user.salary }}</td>
+                                        <td class="tdata status">
+                                            <div class="status-div">
+                                                <div class="status-display">{{ user.description }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="tdata">
+                                            <div class="toggle-switch">
+                                                <input type="checkbox" id="statusToggle-{{ user.id }}" class="toggle-input" {% if job_opening.status %}checked{% endif %}>
+                                                <label for="statusToggle-{{ user.id }}" class="toggle-label"></label>
+                                            </div>
+                                        </td>                                        
+                                        
+                                        
+                                        <!-- <td class="tdata status" title="{{ user.notes }}">
+                                            <div class="status-display">{{ user.notes }}</div>
+                                        </td> -->
+                                        
+                                        <td class="tdata">
+                                            <div>
+                                                <a href="/update_job_openings/{{user.id}}">
+                                                    <span class="edit">
+                                                        <?xml version="1.0" ?><svg class="edit-icon action-div" id="Outlined" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><g id="Fill"><path d="M29.12,6.05,26,2.88a3,3,0,0,0-4.24,0L6.29,18.29a3.06,3.06,0,0,0-.72,1.18L2.08,29.92l10.46-3.49a3.15,3.15,0,0,0,1.17-.72L29.12,10.29a3,3,0,0,0,0-4.24Zm-21,13.28,8.75-8.74,1.58,1.58L9.67,20.92ZM18.24,9.17l1.59-1.58,4.58,4.58-1.58,1.59ZM7.1,21.19l3.72,3.71L5.25,26.75Zm5.57,2.73-1.59-1.59,8.75-8.74,1.58,1.58Zm15-15-1.88,1.88L21.24,6.17l1.88-1.88A1,1,0,0,1,23.83,4a1,1,0,0,1,.71.29l3.17,3.18a1,1,0,0,1,.29.7A1,1,0,0,1,27.71,8.88Z"/></g></svg>
+                                                    </span>
+                                                </a>
+                                                <a href="/delete_job_openings/{{user.id}}">
+                                                    <span class="delete">
+                                                        <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg class="delete-icon action-div" height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z"/><g><rect class="action-div" height="241" width="14" x="249" y="160"/><polygon class="action-div" points="320,160 305.4,160 294.7,401 309.3,401   "/><polygon class="action-div" points="206.5,160 192,160 202.7,401 217.3,401   "/></g></g></svg>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <button type="button" class="btn btn-danger" id="deleteSelected">Delete Selected Users</button> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- CSRF token -->
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    function showMessage() {
+        const alertBox = document.getElementById('message');
+        alertBox.style.display = 'block';
+
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 5000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => showMessage());
+
+
+    function toggleDropdown(element) {
+        // Close all dropdowns
+        const allDropdowns = document.querySelectorAll('.dropdown-menu');
+        allDropdowns.forEach(dropdown => {
+            if (dropdown !== element.nextElementSibling) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Close all arrows
+        const allArrows = document.querySelectorAll('.right_arrow');
+        allArrows.forEach(arrow => {
+            if (arrow !== element.querySelector('.right_arrow')) {
+                arrow.classList.remove('arrow_user');
+            }
+        });
+
+        // Toggle the clicked dropdown and arrow
+        const dropdownMenu = element.nextElementSibling;
+        dropdownMenu.classList.toggle('show');
+        const rightArrow = element.querySelector('.right_arrow');
+        rightArrow.classList.toggle('arrow_user');
+    }
+
+    document.getElementById('toggle-sidenav').addEventListener('click', function () {
+        const sidenav = document.getElementById('sidenav');
+        sidenav.classList.toggle('collapsed');
+    });
+
+
+    document.getElementById('select_all').addEventListener('change', function () {
+        let checkboxes = document.querySelectorAll('.user-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectAllCheckbox = document.getElementById('select_all');
+        const userCheckboxes = document.querySelectorAll('.user-checkbox');
+        console.log(userCheckboxes)
+        const deleteSelectedButton = document.getElementById('deleteSelected');
+        const csrfToken = document.getElementById('csrfToken').value;
+
+        // Select all checkboxes functionality
+        selectAllCheckbox.addEventListener('change', function () {
+            userCheckboxes.forEach(function (checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        });
+
+        // Delete selected users via AJAX
+        deleteSelectedButton.addEventListener('click', function () {
+            const selectedUserIds = Array.from(userCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            console.log("Selected User : ", selectedUserIds)
+
+            if (selectedUserIds.length > 0) {
+                if (confirm('Are you sure you want to delete the selected jobs?')) {
+                    fetch('/delete_all_job_openings/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrfToken
+                        },
+                        body: JSON.stringify({ user_ids: selectedUserIds })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.reload();
+                        } else {
+                            alert('An error occurred: ' + data.error);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                }
+            } else {
+                alert('No jobs selected for deletion.');
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectAllCheckbox = document.getElementById('select_all');
+        const checkboxes = document.querySelectorAll('.user-checkbox');
+
+        function updateRowStyles(checkbox) {
+            const row = checkbox.closest('tr');
+            const permissions = row.querySelectorAll('.permission-class');
+            const actionDivElements = row.querySelectorAll('.action-div'); // Select all elements inside .action-div
+
+            if (checkbox.checked) {
+                row.classList.add('checked-row');
+                permissions.forEach(function(permission) {
+                    permission.classList.add('checked-perm');
+                });
+                actionDivElements.forEach(function(element) {
+                    element.classList.add('checked-action');
+                });
+            } else {
+                row.classList.remove('checked-row');
+                permissions.forEach(function(permission) {
+                    permission.classList.remove('checked-perm');
+                });
+                actionDivElements.forEach(function(element) {
+                    element.classList.remove('checked-action');
+                });
+            }
+        }
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                updateRowStyles(this);
+            });
+        });
+
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                    updateRowStyles(checkbox);
+                });
+            });
+        }
+    });
+
+    // custom select option function
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.getElementById('perPageSelect');
+        const customSelect = document.createElement('div');
+        customSelect.className = 'custom-select';
+        
+        const selectedOption = document.createElement('div');
+        selectedOption.className = 'selected-option';
+        customSelect.appendChild(selectedOption);
+        
+        const downArrow = document.createElement('span');
+        downArrow.className = 'downward-arrow';
+        selectedOption.appendChild(downArrow);
+        
+        const customOptionsContainer = document.createElement('div');
+        customOptionsContainer.className = 'custom-options';
+        customSelect.appendChild(customOptionsContainer);
+
+        Array.from(select.options).forEach(option => {
+            const customOption = document.createElement('div');
+            customOption.className = 'custom-option';
+            customOption.textContent = option.textContent;
+            customOption.dataset.value = option.value;
+
+            if (option.selected) {
+                selectedOption.textContent = option.textContent;
+                selectedOption.appendChild(downArrow);
+                customOption.classList.add('selected');
+            }
+
+            customOption.addEventListener('click', function() {
+                Array.from(customOptionsContainer.children).forEach(child => child.classList.remove('selected'));
+                customOption.classList.add('selected');
+                selectedOption.textContent = customOption.textContent;
+                selectedOption.appendChild(downArrow);
+                select.value = customOption.dataset.value;
+                select.dispatchEvent(new Event('change'));
+                customOptionsContainer.classList.remove('show');
+            });
+
+            customOptionsContainer.appendChild(customOption);
+        });
+
+        select.parentNode.insertBefore(customSelect, select);
+        select.style.display = 'none';
+
+        selectedOption.addEventListener('click', function() {
+            customOptionsContainer.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!customSelect.contains(event.target)) {
+                customOptionsContainer.classList.remove('show');
+            }
+        });
+    });
+
+
+    function updateText() {
+        const textArea = document.getElementById("textArea");
+        const textDisplay = document.getElementById("textDisplay");
+        
+        const text = textArea.value;
+        console.log(text.length())
+        if (text.length > 400) {
+            textDisplay.textContent = text.substring(0, 400) + '...';
+        } else {
+            textDisplay.textContent = text;
+        }
+    }
+
+    document.querySelectorAll('.toggle-input').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // Log the entire ID to debug
+            console.log("Full ID: ", this.id);
+
+            // Check if the ID format matches your expectation
+            const parts = this.id.split('-');
+            const jobOpeningId = parts[1];  // Extract the ID part
+            const newStatus = this.checked;  // Get the new status (true if checked, false if not)
+
+            console.log("jobOpeningId : ", jobOpeningId);
+            console.log("New Status: ", newStatus);
+
+            // Send an AJAX request to update the status in the backend
+            fetch('/update_job_opening_status/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    'job_opening_id': jobOpeningId,
+                    'status': newStatus
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (!data.success) {
+                    alert('Failed to update status');
+                    // Optionally, revert the checkbox if the update failed
+                    this.checked = !newStatus;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+
+</script>
+{% endblock %}

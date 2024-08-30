@@ -1,0 +1,299 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.sidenav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #c72571;
+    height: auto;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c72571;
+}
+
+.sidenav ul {
+    padding: 0;
+}
+
+.sidenav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px 16px;
+}
+
+.sidenav .brand {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: block;
+    padding: 10px 0;
+    background-color: #b31d5d;
+}
+
+li .brand:hover {
+    color: #fff;
+    background-color: #c72571;
+}
+
+.dashboard {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.bi-columns-gap {
+    width: 12px;
+    fill: #fff;
+}
+
+.btn:hover, .btn:focus {
+    background-color: #fff;
+    color: #c72571;
+}
+
+.btn:focus .bi-caret-right-fill {
+    fill: #c72571;
+}
+
+.dropdown-menu a:hover {
+    background-color: #fcddec;
+    color: #000000;
+}
+
+.dropdown-menu .slash {
+    font-size: 12px;
+    padding-right: 10px;
+}
+
+.dropdown-menu a:hover .slash, .dropdown-menu a:not(:hover) .slash {
+    color: #c72571;
+}
+
+.btn-div {
+    border-radius: 0px;
+}
+
+li a:hover {
+    background-color: #fff;
+}
+
+li a:hover .dashboard {
+    color: #c72571;
+}
+
+li a:hover .bi-columns-gap {
+    fill: #c72571;
+}
+
+.dropdown:hover .bi-caret-right-fill {
+    fill: #c72571;
+}
+
+.btn-check:focus+.btn,
+.btn:focus {
+    box-shadow: none;
+}
+
+.sidenav li .menus {
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.sidenav ul .new,
+.sidenav ul .manage {
+    font-size: 11px;
+    padding: 5px 0px 5px 52px;
+    font-weight: 600;
+}
+
+.active {
+    background-color: #ffffff;
+    color: #c72571;
+}
+
+.dropdown-content {
+    background-color: #c72571;
+    /* width: calc(100% - 40px); Adjust width to match parent */
+    width: 100%;
+    padding: 0;
+    /* margin-left: 40px; Align with parent padding */
+    display: none;
+    /* Start with dropdowns hidden */
+    position: relative;
+    transition: all 2s;
+    /* Ensure dropdowns don't overlap other content */
+}
+
+.dropdown-menu a {
+    color: #fff;
+}
+
+.bi-caret-right-fill {
+    fill: #fff;
+    width: 12px;
+    transition: transform 0.3s ease;
+    rotate: -90deg;
+}
+
+.arrow_user {
+    transition: transform 0.3s ease;
+}
+
+/*--------------------------------- dropdown ----------------------- */
+.dropdown-menu {
+    display: none;
+    transition: all 0.5s ease;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.right_arrow.arrow_user {
+    transition: transform 0.5s ease;
+}
+
+.sidenav {
+    transition: width 0.5s ease;
+}
+
+.sidenav.collapsed {
+    width: 50px; /* Adjust this value as needed */
+}
+
+.sidenav.collapsed .menus {
+    display: none;
+}
+/* ---------------------------- */
+.dropdown-menu {
+    display: none;
+    transition: all 2s ease;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.right_arrow.arrow_user {
+    transition: transform 2.5s ease;
+}
+
+/* -------------------------------- */
+
+
+/* ------------------------------------------------------------------ */
+
+.dropdown.show .dropdown-menu {
+    display: block;
+    transition: all 2s ease-in-out;
+    /* Show dropdown when active */
+}
+
+.dropdown-menu.show {
+    border: none;
+}
+
+.dropdown .arrow_user .bi-caret-right-fill {
+    rotate: 90deg;
+    /* Rotate arrow when dropdown is active */
+}
+
+.images {
+    width: 40px;
+    height: 40px;
+}
+
+/* Flexbox for dropdown items */
+.sidenav .dropdown>a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidenav .right_arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease-out;
+}
+
+/* Navbar */
+.bi-list {
+    margin: 20px;
+}
+
+.user-div {
+    font-size: 12px;
+}
+
+.dropdown-div {
+    padding: 0px;
+    margin: 0px;
+}
+
+.dropdown-div li .admin {
+    font-size: 10px;
+}
+
+/* card */
+
+.custom-div {
+    background-color: #fcddec;
+    padding: 0px 24px;
+}
+
+.card {
+    width: 100%;
+    position: relative;
+    margin: auto;
+}
+
+.card .image-div {
+    position: absolute;
+    top: -26px;
+    left: 20px;
+    box-shadow: 2px 2px 10px #ccc;
+}
+
+.image-div img {
+    width: 70px;
+    height: 70px;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #ccc;
+}
+
+.total {
+    font-family: sans-serif;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 769px) {
+    .sidenav {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidenav ul li a {
+        /* float: left; */
+        padding: 15px;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .sidenav ul li a {
+        float: none;
+    }
+}

@@ -1,0 +1,188 @@
+.background-div {
+    background-color: #fcddec;
+}
+
+.text-area {
+    border: 2px solid #842029;
+    padding-bottom: 14px;
+    font-size: 14px;
+}
+
+.text-area::placeholder {
+    padding:10px 0px 0px 20px;
+}
+
+.user-a {
+    color: #c72571;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.user-a:hover {
+    color: #c72571;
+}
+
+.user-para {
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+h5::before {
+    content: "";
+    display: block;
+    border-top: 5px solid #842029;
+    margin-bottom: 1px;
+    width: 28px;
+    border-radius: 5px;
+}
+
+/* Styles for the floating label */
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 10px;
+    transition: 0.2s ease all;
+    font-size: 14px;
+    color: #888;
+}
+
+
+.user-input-wrp input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #842029;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* When the input field is focused */
+.user-input-wrp input:focus~.floating-label {
+    top: -12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #ffffff;
+}
+
+/* When there is content in the input field */
+.user-input-wrp input:not(:placeholder-shown)~.floating-label {
+    top: -12px;
+    font-size: 14px;
+    color: #333;
+    background-color: #ffffff;
+}
+
+/* When the input field is not focused and empty */
+.user-input-wrp input:not(:focus):placeholder-shown~.floating-label {
+    top: 13px;
+    font-size: 14px;
+    color: #888;
+
+}
+
+.user-input-wrp {
+    position: relative;
+    margin: 20px 0;
+}
+
+.permission-p {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: #842029 !important;
+    border: 2px solid #842029;
+    box-shadow: 0 0 0 0 #842029 !important;
+}
+
+.form-check-input:checked {
+    background-color: #c72571 !important;
+    border-color: #c72571 !important;
+}
+
+.form-check-input[type="checkbox"] {
+    border-radius: 0px !important;
+    border: 1px solid black;
+    width: 12px;
+    height: 12px;
+    margin-top: 8px;
+}
+
+.form-check-input:focus {
+    border-color: #c72571 !important;
+    box-shadow: 0 0 0 0 #c72571 !important;
+}
+
+.form-check-label {
+    font-size: 13px;
+}
+
+.login-btn {
+    width: 25%;
+    margin-top: 4%;
+    margin-bottom: 10%;
+    font-size: 16px;
+    float: right;
+    border: 1px solid #842029 !important;
+    border-radius: 50px !important;
+    padding: 10px;
+}
+
+.login-btn:hover {
+    background-color: #8d0f4c !important;
+    color: #ffffff !important;
+}
+
+/* style for error message */
+
+.relative {
+    position: relative;
+}
+
+.error-div {
+    position: absolute;
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+}
+
+.position {
+    position: relative;
+}
+
+.perm-error {
+    right: 0px;
+    top: 60px;
+}
+
+/* password view and hide style */
+.bi-eye-slash {
+    position: absolute;
+    right: 24px;
+    bottom: 14px;
+}
+
+.message {
+    position: absolute;
+    color: green;
+    right: 20px;
+    top: 0px;
+}
+
+
+/* common errors */
+
+.errors-common {
+    font-size: 14px;
+    color: #c72571;
+    text-decoration: none;
+    text-align: center;
+    margin: 0px 0px 40px 0px;
+}
+
+.ul-errors {
+    list-style-type: none;
+}

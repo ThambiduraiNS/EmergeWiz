@@ -1,0 +1,252 @@
+{% load static %}
+{% load bootstrap_icons %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <link rel="stylesheet" href="{% static '/css/header.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 sidenav" id="sidenav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link brand" aria-current="page" href="#">Nschool</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/">{% bs_icon 'columns-gap' %} <span
+                                class="menus dashboard">DashBoard</span></a>
+                    </li>
+                    
+                    
+                    <!-- <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="btn btn-div w-100 text-start" href="#" role="button"
+                                onclick="toggleDropdown(this)">
+                                {% bs_icon 'person' %} <span class="menus">User</span> 
+                                <span class="right_arrow">{% bs_icon 'caret-right-fill' %}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-content">
+                                <li><a class="dropdown-item new" href="/user_module/"><span class="slash">|</span> New User</a></li>
+                                <li><a class="dropdown-item manage" href="/manage_user/"><span class="slash">|</span> Manage User</a></li>
+                            </ul>
+                        </div>
+                    </li> -->
+                    
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="btn btn-div w-100 text-start" href="#" role="button"
+                                onclick="toggleDropdown(this)">
+                                {% bs_icon 'book' %} <span class="menus">Job Openings</span> 
+                                <span class="right_arrow">{% bs_icon 'caret-right-fill' %}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-content">
+                                <li><a class="dropdown-item new" href="/add_job_openings/"><span class="slash">|</span> Add Jobs </a></li>
+                                <li><a class="dropdown-item manage" href="/manage_job_openings/"><span class="slash">|</span> Manage Jobs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="row">
+                    <div class="col-6">
+                        <span id="toggle-sidenav">{% bs_icon 'list' %}</span>
+                    </div>
+                    <div class="col-5 col-sm-5 pt-3 m-0 d-flex justify-content-center justify-content-sm-end">
+                        <img class="images" src="{% static '/images/user.png' %}">
+                        <li class="drop">
+                            <a href="javascript:void(0)" class="dropbtn">
+                                <span class="profile">User Name</span>
+                                <p class="admin-p">
+                                    {% if user.is_authenticated %}
+                                        {{ user.username }}
+                                    {% endif %}
+                                </p>
+                                <span class="down-arrow">{% bs_icon 'chevron-down' %}</span>
+                            </a>
+                            <div class="drop-content">
+                                <div class="d-flex w-100">
+                                    <img class="images-drop ps-2" src="{% static '/images/user.png' %}" alt="user">
+                                    <span class="ps-2">
+                                        User Name
+                                        <p class="admin-drop-p mb-0">
+                                            {% if user.is_authenticated %}
+                                                {{ user.username }}
+                                            {% endif %}
+                                        </p>
+                                    </span>
+                                    
+                                </div>
+                                <hr>
+                                <a href="#" class="pt-0 mt-0">{% bs_icon 'person-circle' %} <span class="Profile ps-2">Profile</span></a>
+                                <a href="/logout/">{% bs_icon 'box-arrow-right' %} <span class="Logout ps-2">Logout</span> </a>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col custom-div">
+                        <!-- Your content here -->
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-3 mt-5 mt-sm-5 pt-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Total</p>
+                                        <p class="card-text my-0">Enquiry</p>
+                                        <p class="total pt-3 fw-semibold">25</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-5 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Total</p>
+                                        <p class="card-text my-0">Students</p>
+                                        <p class="total pt-3 fw-semibold">250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 mt-md-5 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Payment</p>
+                                        <p class="card-text my-0">Pending</p>
+                                        <p class="total pt-3 fw-semibold">250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 mt-md-5 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Total</p>
+                                        <p class="card-text my-0">Collections</p>
+                                        <p class="total pt-3 fw-semibold">₹250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- second row -->
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Course</p>
+                                        <p class="card-text my-0">Completion</p>
+                                        <p class="total pt-3 fw-semibold">250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Placement</p>
+                                        <p class="card-text my-0">Details</p>
+                                        <p class="total pt-3 fw-semibold">250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Active</p>
+                                        <p class="card-text my-0">Students</p>
+                                        <p class="total pt-3 fw-semibold">250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-3 mt-3 mt-sm-0 pt-2 pt-sm-4 pe-0 mb-sm-0">
+                                <div class="card mb-5">
+                                    <div class="image-div">
+                                        <img src="{% static 'images/enquiry.jpg' %}" alt="">
+                                    </div>
+                                    <div class="card-body text-end">
+                                        <p class="card-text my-0">Discontinued</p>
+                                        <p class="card-text my-0">Students</p>
+                                        <p class="total pt-3 fw-semibold">250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="chartContainer" style="width: 100%; height: 360px;"></div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    function toggleDropdown(element) {
+        // Close all dropdowns
+        const allDropdowns = document.querySelectorAll('.dropdown-menu');
+        allDropdowns.forEach(dropdown => {
+            if (dropdown !== element.nextElementSibling) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Close all arrows
+        const allArrows = document.querySelectorAll('.right_arrow');
+        allArrows.forEach(arrow => {
+            if (arrow !== element.querySelector('.right_arrow')) {
+                arrow.classList.remove('arrow_user');
+            }
+        });
+
+        // Toggle the clicked dropdown and arrow
+        const dropdownMenu = element.nextElementSibling;
+        dropdownMenu.classList.toggle('show');
+        const rightArrow = element.querySelector('.right_arrow');
+        rightArrow.classList.toggle('arrow_user');
+    }
+
+    document.getElementById('toggle-sidenav').addEventListener('click', function() {
+        const sidenav = document.getElementById('sidenav');
+        sidenav.classList.toggle('collapsed');
+    });
+</script>
+
+</html>

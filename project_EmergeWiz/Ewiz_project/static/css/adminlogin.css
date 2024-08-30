@@ -1,0 +1,290 @@
+/* updated style */
+
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    padding: 0 3.75rem; /* Adjust padding as needed */
+}
+
+.left-div {
+    background-color: #fcddec;
+}
+
+.img-div {
+    width: 100%;
+    background-image: url(/static/images/wave1.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* top: 300px; */
+    left: 0;
+    /* bottom: 0px; */
+    height: 85%;
+}
+
+.span_div {
+    position: relative;
+    font-size: 10px;
+    margin-left: 12px;
+    height: 10px;
+    padding-bottom: 11px;
+}
+
+.span_div_pass {
+    top: -8px;
+}
+
+.error-msg {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0px;
+    margin: 40px auto;
+}
+
+.admin-div {
+    width: 100%;
+}
+
+.admin-img {
+    height: 200px;
+    width: 220px;
+    margin: 5% 28%;
+}
+
+/* Add border top to the "Login" text within the <p> element */
+p::before {
+    content: "";
+    display: block;
+    border-top: 4px solid #842029; /* Adjust border properties as needed */
+    margin-bottom: 3px; /* Adjust spacing between border and text */
+    width: 28px; /* Adjust width of the border */
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 2rem !important;
+    font-weight: 500;
+}
+
+.card {
+    width: 80%;
+    margin: auto;
+    top: -40px;
+}
+
+.alert-div {
+    margin-top: 15px;
+    padding: 5px !important;
+    color: #c72f1d !important;
+    background-color: #f5c2c7;
+    font-size: 14px;
+}
+
+.input-div{
+    padding: 0% 4%;
+    margin-bottom: 3%;
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    padding: 5px;
+}
+
+.card-body {
+    background-color: #fff1fb;
+}
+
+.form-control {
+    border-radius: 50px !important;
+    padding: 0.690rem 0.75rem;
+    background-color: #fff1fb !important;
+    border: 1px solid #842029 !important;
+    margin-top: 5%;
+    box-shadow: 0px 0px 0px #842029 !important;
+}
+
+.form-control:focus {
+    padding: 10px 10px 10px 22px;
+}
+
+.inputs {
+    padding-left: 22px;
+}
+
+.form-div {
+    margin-top: 20%;
+}
+
+.admin-main-div {
+    padding-top: 7%;
+}
+
+.alert-div {
+    margin-top: 15px;
+    padding: 5px;
+    color: #c72f1d;
+    background-color: #f5c2c7;
+    font-size: 14px;
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 6%;
+    background-color: #8d0f4c !important;
+    font-size: 16px;
+    float: right;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    padding: 10px;
+}
+/* ----------------------------------------------------- */
+/* Styles for the floating label */
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 10px;
+    transition: 0.2s ease all;
+    font-size: 14px;
+    color: #888;
+}
+
+/* Styles for the input field */
+.user-input-wrp input {
+    position: relative;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* When the input field is focused */
+.user-input-wrp input:focus ~ .floating-label {
+    top: -14px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff1fb;
+}
+
+/* When there is content in the input field */
+.user-input-wrp input:not(:placeholder-shown) ~ .floating-label {
+    top: -14px;
+    font-size: 14px;
+    background-color: #fff1fb;
+    color: #333;
+}
+
+/* When the input field is not focused and empty */
+.user-input-wrp input:not(:focus):placeholder-shown ~ .floating-label {
+    top: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.user-input-wrp {
+    position: relative;
+    margin: 20px 0;
+}
+
+/* password view and hide style */
+.bi-eye-slash {
+    position: absolute;
+    right: 24px;
+    bottom: 14px;
+}
+
+/* style for password validation */
+
+.span-pass {
+    width: 100%;
+    display: flex;
+    font-size: 12px;
+    padding: 5px 16px;
+}
+
+/* The message box */
+#password-message { 
+    display: none;
+    background: #fff1fb;
+    color: #000;
+    position: relative;
+    padding: 0px 20px;
+    /* margin-top: 10px; */
+    text-align: left; 
+} 
+  
+#password-message h3 { 
+    font-size: 12px;
+    margin-top: 0;
+    text-transform: uppercase; 
+} 
+  
+#password-message span { 
+    margin: 8px 0; 
+} 
+  
+.valid { 
+    color: green; 
+} 
+  
+.valid:before { 
+    position: relative; 
+    left: -16px; 
+    content: "✔"; 
+} 
+  
+.invalid { 
+    color: red; 
+} 
+  
+.invalid:before { 
+    position: relative; 
+    left: -16px; 
+    content: "✖"; 
+} 
+  
+/* Error message style */
+.error-msg { 
+    color: red; 
+    font-size: 14px; 
+    margin-top: 4px; 
+}
+
+/* ---------------------------------------------------------------- */
+
+@media (max-width:1441px) {
+    .admin-img {
+        margin: 5% 30%;
+    }
+
+    .img-div {
+        height: 85%;
+    }
+}
+
+@media (max-width:1025px) {
+    .admin-img {
+        margin: 5% 25%;
+    }
+
+    .img-div {
+        height: 210%;
+    }
+}
+
+@media (max-width:769px) {
+    .admin-img {
+        margin: 5% 16%;
+    }
+
+    .img-div {
+        height: 210%;
+    }
+}

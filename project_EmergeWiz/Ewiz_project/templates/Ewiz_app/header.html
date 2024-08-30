@@ -1,0 +1,50 @@
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block header %}
+
+<div class="row m-0 p-0">
+    <div class="col-2 sidenav">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link brand" aria-current="page" href="#">Nschool</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 col-md-7 p-0 m-0">
+        <span id="toggle-sidenav" class="ps-3">{% bs_icon 'list' %}</span>
+    </div>
+    <div class="col-6 col-md-3 pt-3 m-0 d-flex justify-content-end justify-content-md-center">
+        <img class="images" src="{% static '/images/user.png' %}">
+        <li class="drop">
+            <a href="javascript:void(0)" class="dropbtn">
+                <span class="profile">User Name</span> 
+                <p class="admin-p">
+                    {% if user.is_authenticated %}
+                        {{ user.username }}
+                    {% endif %}
+                </p>
+                <span class="down-arrow">{% bs_icon 'chevron-down' %}</span>
+            </a>
+            <div class="drop-content">
+                <div class="d-flex w-100">
+                    <img class="images-drop ps-2" src="{% static '/images/user.png' %}" alt="user">
+                    <span class="ps-2">
+                        User Name
+                        <p class="admin-drop-p mb-0">
+                            {% if user.is_authenticated %}
+                                {{ user.username }}
+                            {% endif %}
+                        </p>
+                    </span>
+                    
+                </div>
+                <hr>
+                <a href="#" class="pt-0 mt-0">{% bs_icon 'person-circle' %} <span class="Profile ps-2">Profile</span></a>
+                <a href="/logout/">{% bs_icon 'box-arrow-right' %} <span class="Logout ps-2">Logout</span> </a>
+            </div>
+        </li>
+    </div>
+</div>
+
+{% endblock %}
